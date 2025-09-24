@@ -8,6 +8,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //THIS GUY WILL PROVIDE ME WITH NETWORKS FOR TALKING TO MY DATABASE
     //we use <> to bind it to a particular repository
     //the primary key is of type long
+    //we validate if user exists using the email
+
+    Boolean existsByEmail(String email);
+
 
 
 

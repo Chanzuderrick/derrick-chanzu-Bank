@@ -21,13 +21,17 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+
+
 @Entity
 @Table(name = "users")
 
 public class User{
+
+
     //we first begin by stating the attributes the user should have
 
     
