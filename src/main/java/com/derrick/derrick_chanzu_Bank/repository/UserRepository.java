@@ -1,0 +1,18 @@
+package com.derrick.derrick_chanzu_Bank.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.derrick.derrick_chanzu_Bank.entity.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    //THIS GUY WILL PROVIDE ME WITH NETWORKS FOR TALKING TO MY DATABASE
+    //we use <> to bind it to a particular repository
+    //the primary key is of type long
+
+
+
+
+
+
+
+}
