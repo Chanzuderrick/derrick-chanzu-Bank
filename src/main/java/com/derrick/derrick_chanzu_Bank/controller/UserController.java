@@ -11,10 +11,10 @@ import com.derrick.derrick_chanzu_Bank.dto.UserRequest;
 import com.derrick.derrick_chanzu_Bank.service.impl.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping ("/api/user")
 public class UserController {
+    
     @Autowired
-
     UserService userService;
 
     @PostMapping
