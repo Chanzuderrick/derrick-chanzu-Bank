@@ -7,15 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.derrick.derrick_chanzu_Bank.dto.AccountInfo;
 import com.derrick.derrick_chanzu_Bank.dto.BankResponse;
+import com.derrick.derrick_chanzu_Bank.dto.EmailDetails;
 import com.derrick.derrick_chanzu_Bank.dto.UserRequest;
 import com.derrick.derrick_chanzu_Bank.entity.User;
 import com.derrick.derrick_chanzu_Bank.repository.UserRepository;
 import com.derrick.derrick_chanzu_Bank.utils.AccountUtils;
 
 import lombok.Builder;
-
-
-import java.math.BigDecimal;
 
 @Service
 @Builder
@@ -25,6 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    EmailService emailService;
+
 
     // ILL now have access to methods in the user repository
  
@@ -86,7 +88,26 @@ public class UserServiceImpl implements UserService {
 
         //we then save the user to the database
 
-        User savedUser = userRepository.save(newUser); 
+        User savedUser = userRepository.save(newUser);
+        
+        //send email alerts
+       
+
+        EmailDetails emailDetails = EmailDetails.builder()
+    .recipient(savedUser.getEmail())
+    .subject("ACCOUNT CREATION")
+    .messageBody(
+        "Congratulations, " + savedUser.getFirstName() + 
+        " your account has been successfully created!\n" +
+        "Your account details are:\n" +
+        "Account name: " + savedUser.getFirstName() + " " + savedUser.getLastName() + " " + savedUser.getOtherName() + "\n" +
+        "Account number: " + savedUser.getAccountNumber() + "\n\n" +
+        "Thank you for banking with us!"
+    )
+    .build();
+
+
+        emailService.sendEmailAlert(emailDetails);
 
         return BankResponse.builder()
         .responseCode(AccountUtils.ACCOUNT_CREATION_SUCCESS)

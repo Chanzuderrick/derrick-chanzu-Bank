@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "users") // helpful in converting the users into a table in mySQL
 
 public class User{
 

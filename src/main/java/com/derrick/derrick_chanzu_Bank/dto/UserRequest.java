@@ -20,6 +20,7 @@ public class UserRequest {
      * its not everything in the entity class that I want to expose
      * it helps me to create my objects
      * helps me collect data from the user to the database
+     * it defines sort of request user has to send
     */
 
     private String firstName;

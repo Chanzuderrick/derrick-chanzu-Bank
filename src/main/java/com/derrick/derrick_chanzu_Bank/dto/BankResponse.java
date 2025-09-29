@@ -15,6 +15,7 @@ public class BankResponse {
      * we also want to define a response
      * I want a single response for every single service
      * we will also make use of composition
+     * after sending the info in the userRequest we will be expecting this response
      * 
     */
 

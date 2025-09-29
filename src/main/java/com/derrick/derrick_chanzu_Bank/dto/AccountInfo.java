@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 
 
 public class AccountInfo {
+    //basically just returns the account details
     private String accountName;
     private BigDecimal accountBalance;
     private String accountNumber;
