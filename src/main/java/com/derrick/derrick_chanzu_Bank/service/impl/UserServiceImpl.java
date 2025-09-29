@@ -95,14 +95,14 @@ public class UserServiceImpl implements UserService {
 
         EmailDetails emailDetails = EmailDetails.builder()
     .recipient(savedUser.getEmail())
-    .subject("ACCOUNT CREATION")
+    .subject("WELCOME TO DERRICK CHANZU BANK, YOUR NEW ACCOUNT IS READY")
     .messageBody(
-        "Congratulations, " + savedUser.getFirstName() + 
-        " your account has been successfully created!\n" +
-        "Your account details are:\n" +
+        "Dear " + savedUser.getFirstName() + 
+        ", \n\n We are delighted to inform you that your account has been successfully created!\n" +
+        "Here are your account details:\n\n" +
         "Account name: " + savedUser.getFirstName() + " " + savedUser.getLastName() + " " + savedUser.getOtherName() + "\n" +
         "Account number: " + savedUser.getAccountNumber() + "\n\n" +
-        "Thank you for banking with us!"
+        "We are excited to have you on board. Thank you for choosing Derrick Chanzu Bank! \n\n Best regards, \n Derrick Chanzu Bank Team, \n Customer Support: 0742804467"
     )
     .build();
 

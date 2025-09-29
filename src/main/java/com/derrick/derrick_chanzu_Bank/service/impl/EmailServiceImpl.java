@@ -12,13 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import com.derrick.derrick_chanzu_Bank.dto.EmailDetails;
 import lombok.*;
 
-
-
-
-
 @Service
-
-
 
 public class EmailServiceImpl implements EmailService {
 
