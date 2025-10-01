@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
             return AccountUtils.ACCOUNT_NOT_EXIST_MESSAGE;
         }
 
-        User foundUser = userRepository.findByAccountName(request.getAccountNumber());
+        User foundUser = userRepository.findByAccountNumber(request.getAccountNumber());
         
 
         return foundUser.getFirstName() + " " + foundUser.getLastName() + " " +foundUser.getOtherName() ;
