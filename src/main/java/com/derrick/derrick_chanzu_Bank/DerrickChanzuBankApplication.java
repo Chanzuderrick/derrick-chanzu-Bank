@@ -10,4 +10,7 @@ public class DerrickChanzuBankApplication {
 		SpringApplication.run(DerrickChanzuBankApplication.class, args);
 	}
 
+	//balance enquiry, name enquiry, credit, debit, transfer
+
+
 }
