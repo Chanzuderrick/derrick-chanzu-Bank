@@ -78,6 +78,9 @@ public class UserServiceImpl implements UserService {
                 .alternativePhoneNumber(userRequest.getAlternativePhoneNumber())
 
                 .status("ACTIVE")
+
+                .accountName(userRequest.getFirstName() + " " + userRequest.getLastName() + " " +userRequest.getOtherName())
+
         
 
 
@@ -147,7 +150,7 @@ public class UserServiceImpl implements UserService {
                     .build();
         }
         
-        User foundUser = userRepository.findByAccountName(request.getAccountNumber());
+        User foundUser = userRepository.findByAccountNumber(request.getAccountNumber());
 
         return BankResponse.builder()
                 .responseCode(AccountUtils.ACCOUNT_FOUND_CODE)

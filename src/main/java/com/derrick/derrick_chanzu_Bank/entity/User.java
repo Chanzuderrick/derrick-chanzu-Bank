@@ -51,6 +51,7 @@ public class User{
     private String phoneNumber;
     private String alternativePhoneNumber;
     private String status;
+    private String accountName;
     
 
     @CreationTimestamp
