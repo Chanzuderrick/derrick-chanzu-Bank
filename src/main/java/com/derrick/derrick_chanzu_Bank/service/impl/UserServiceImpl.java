@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.derrick.derrick_chanzu_Bank.dto.AccountInfo;
 import com.derrick.derrick_chanzu_Bank.dto.BankResponse;
+import com.derrick.derrick_chanzu_Bank.dto.CreditDebitRequest;
 import com.derrick.derrick_chanzu_Bank.dto.EmailDetails;
 import com.derrick.derrick_chanzu_Bank.dto.EnquiryRequest;
 import com.derrick.derrick_chanzu_Bank.dto.UserRequest;
@@ -181,6 +182,42 @@ public class UserServiceImpl implements UserService {
 
         return foundUser.getFirstName() + " " + foundUser.getLastName() + " " +foundUser.getOtherName() ;
 
+    }
+
+    @Override
+    public BankResponse creditAccount(CreditDebitRequest request){
+        //checking if the account exists
+        boolean isAccountExists = userRepository.existsByAccountNumber(request.getAccountNumber());
+
+        if (!isAccountExists) {
+            return BankResponse.builder()
+                    .responseCode(AccountUtils.ACCOUNT_NOT_EXIST_CODE)
+                    .responseMessage(AccountUtils.ACCOUNT_NOT_EXIST_MESSAGE)
+                    .accountInfo(null)
+
+                    .build();
+        }
+        
+        User userToCredit = userRepository.findByAccountNumber(request.getAccountNumber());
+        //update the information of that user
+        //to add bigDecimal is different from integers and doubles we call add method
+
+        userToCredit.setAccountBalance(userToCredit.getAccountBalance().add(request.getAmount()));
+        return BankResponse.builder()
+        .responseCode(AccountUtils.ACCOUNT_CREDITED_SUCCESS)
+        .responseMessage(AccountUtils.ACCOUNT_CREDITED_SUCCESS_MESSAGE)
+        .accountInfo(AccountInfo.builder()
+                        .accountName(userToCredit.getFirstName() + " " + userToCredit.getLastName() + " "
+                                + userToCredit.getOtherName())
+        .accountBalance(userToCredit.getAccountBalance())
+        .accountNumber(request.getAccountNumber())
+
+        
+        .build())
+        .build();
+
+
+        
     }
 
 

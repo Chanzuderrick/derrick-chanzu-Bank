@@ -28,6 +28,10 @@ public class AccountUtils {
    
    public static final String ACCOUNT_FOUND_SUCCESS = "User Account Found";
 
+   public static final String ACCOUNT_CREDITED_SUCCESS = "005";
+
+   public static final String ACCOUNT_CREDITED_SUCCESS_MESSAGE = "User account has been credited!";
+
 
 
 
