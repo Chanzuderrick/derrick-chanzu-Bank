@@ -201,10 +201,12 @@ public class UserServiceImpl implements UserService {
         User userToCredit = userRepository.findByAccountNumber(request.getAccountNumber());
         //update the information of that user
         //to add bigDecimal is different from integers and doubles we call add method
-        userRepository.save(userToCredit);
+        
 
         
          userToCredit.setAccountBalance(userToCredit.getAccountBalance().add(request.getAmount()));
+         userRepository.save(userToCredit);
+         
         return BankResponse.builder()
         .responseCode(AccountUtils.ACCOUNT_CREDITED_SUCCESS)
         .responseMessage(AccountUtils.ACCOUNT_CREDITED_SUCCESS_MESSAGE)
