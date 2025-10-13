@@ -54,11 +54,11 @@ public class User{
     private String accountName;
     
 
-    @CreationTimestamp
+    @CreationTimestamp //for showing time that it was created
 
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @UpdateTimestamp //for updating time
     private LocalDateTime modifiedAt;
 
 

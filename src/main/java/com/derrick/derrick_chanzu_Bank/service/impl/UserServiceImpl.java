@@ -1,6 +1,7 @@
 package com.derrick.derrick_chanzu_Bank.service.impl;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -206,7 +207,7 @@ public class UserServiceImpl implements UserService {
         
          userToCredit.setAccountBalance(userToCredit.getAccountBalance().add(request.getAmount()));
          userRepository.save(userToCredit);
-         
+
         return BankResponse.builder()
         .responseCode(AccountUtils.ACCOUNT_CREDITED_SUCCESS)
         .responseMessage(AccountUtils.ACCOUNT_CREDITED_SUCCESS_MESSAGE)
@@ -222,6 +223,62 @@ public class UserServiceImpl implements UserService {
 
 
         
+    }
+
+    @Override
+
+    public BankResponse debitAccount(CreditDebitRequest request) {
+        //check if the account exists
+        //check if the amount we intend to withdraw is not more than the account balance
+
+          boolean isAccountExists = userRepository.existsByAccountNumber(request.getAccountNumber());
+
+        if (!isAccountExists) {
+            return BankResponse.builder()
+                    .responseCode(AccountUtils.ACCOUNT_NOT_EXIST_CODE)
+                    .responseMessage(AccountUtils.ACCOUNT_NOT_EXIST_MESSAGE)
+                    .accountInfo(null)
+
+                    .build();
+        }
+        
+        User userToDebit = userRepository.findByAccountNumber(request.getAccountNumber());
+
+        //we convert bigDecimal to integers
+
+        BigInteger availableBalance = userToDebit.getAccountBalance().toBigInteger();
+        BigInteger debitAmount = request.getAmount().toBigInteger();
+
+        if (availableBalance.intValue() < debitAmount.intValue()) {
+            return BankResponse.builder()
+                    .responseCode(AccountUtils.INSUFFICIENT_BALANCE_CODE)
+                    .responseMessage(AccountUtils.INSUFFICIENT_BALANCE_MESSAGE)
+            .accountInfo(null)
+            .build();
+            
+        } else {
+            userToDebit.setAccountBalance(userToDebit.getAccountBalance().subtract(request.getAmount()));
+            userRepository.save(userToDebit);
+
+            return BankResponse.builder()
+                    .responseCode(AccountUtils.ACCOUNT_DEBITED_SUCCESS)
+                    .responseMessage(AccountUtils.ACCOUNT_DEBITED_MESSAGE)
+                    .accountInfo(AccountInfo.builder()
+                            .accountName(userToDebit.getFirstName() + " " + userToDebit.getLastName() + " " + userToDebit.getOtherName())
+                            .accountBalance(userToDebit.getAccountBalance())
+                    .accountNumber(request.getAccountNumber())
+            
+                    .build())
+            .build();
+
+
+             
+        }
+        
+
+
+
+       
     }
 
 
