@@ -3,6 +3,7 @@ package com.derrick.derrick_chanzu_Bank.service.impl;
 import com.derrick.derrick_chanzu_Bank.dto.BankResponse;
 import com.derrick.derrick_chanzu_Bank.dto.CreditDebitRequest;
 import com.derrick.derrick_chanzu_Bank.dto.EnquiryRequest;
+import com.derrick.derrick_chanzu_Bank.dto.TransferRequest;
 import com.derrick.derrick_chanzu_Bank.dto.UserRequest;
 
 
@@ -17,5 +18,7 @@ public interface UserService {
     BankResponse creditAccount(CreditDebitRequest request);
 
     BankResponse debitAccount(CreditDebitRequest request);
+
+    BankResponse transfer(TransferRequest request);
 
 }
